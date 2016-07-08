@@ -9,13 +9,14 @@
  */
 package org.openmrs.module.isanteplusopenmrsintro.api;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.Test;
 import org.openmrs.api.context.Context;
 import org.openmrs.test.BaseModuleContextSensitiveTest;
 
 /**
- * Tests {@link ${${module-name-no-spaces}Service}}.
+ * Tests {@link ${IsantePlusOmrsIntroService}.
  */
 public class IsantePlusOmrsIntroServiceTest extends BaseModuleContextSensitiveTest {
 

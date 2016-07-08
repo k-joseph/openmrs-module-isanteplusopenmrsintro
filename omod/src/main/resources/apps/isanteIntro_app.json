@@ -1,0 +1,19 @@
+[
+    {
+        "id": "${project.parent.artifactId}.test",
+        "description": "Learning 2.x development for Itech-haiti team",
+        "order": 14,
+        "extensions": [
+            {
+                "id": "${project.parent.artifactId}.test",
+                "extensionPointId": "org.openmrs.referenceapplication.homepageLink",
+                "type": "link",
+                "order": 10,
+                "label": "iSante-Haiti-Itech",
+                "url": "isanteplusopenmrsintro/test.page",
+                "icon": "icon-picture",
+                "requiredPrivilege": "Task: Isante"
+            }
+        ]
+    }
+]

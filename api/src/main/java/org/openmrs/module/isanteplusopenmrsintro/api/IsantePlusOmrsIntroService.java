@@ -9,8 +9,7 @@
  */
 package org.openmrs.module.isanteplusopenmrsintro.api;
 
-import java.util.List;
-
+import org.json.JSONArray;
 import org.openmrs.Patient;
 import org.openmrs.api.OpenmrsService;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,5 +31,5 @@ public interface IsantePlusOmrsIntroService extends OpenmrsService {
 	 * Add service methods here
 	 * 
 	 */
-	public List<Double> getPatientWeights(Patient patient);
+	public JSONArray getPatientWeights(Patient patient);
 }

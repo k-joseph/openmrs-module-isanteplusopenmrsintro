@@ -7,3 +7,4 @@ target/
 .java-version
 omod/target/
 api/target/
+omod/src/main/compass/.sass-cache/
