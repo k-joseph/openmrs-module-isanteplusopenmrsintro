@@ -52,7 +52,7 @@ public class IsantePlusOmrsIntroServiceImpl extends BaseOpenmrsService implement
 	public JSONArray getPatientWeights(Patient patient) {
 		// weight concept 5089
 		JSONArray weightsJson = new JSONArray();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
 		Integer weightConceptId = StringUtils
 				.isNotBlank(Context.getAdministrationService().getGlobalProperty("concept.weight"))
 						? Integer.parseInt(Context.getAdministrationService().getGlobalProperty("concept.weight"))
