@@ -71,4 +71,35 @@ public class IsantePlusOmrsIntroServiceImpl extends BaseOpenmrsService implement
 		}
 		return weightsJson;
 	}
+	@Override
+	public JSONArray getPatientHeights(Patient patient) {
+		// height concept 5090
+		JSONArray heightsJson = new JSONArray();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Integer heightConceptId = StringUtils
+				.isNotBlank(Context.getAdministrationService().getGlobalProperty("concept.height"))
+						? Integer.parseInt(Context.getAdministrationService().getGlobalProperty("concept.height"))
+						: 5090;
+				/*Integer weightConceptId = StringUtils
+								.isNotBlank(Context.getAdministrationService().getGlobalProperty("concept.weight"))
+										? Integer.parseInt(Context.getAdministrationService().getGlobalProperty("concept.weight"))
+										: 5089;*/
+		Concept height = Context.getConceptService().getConcept(heightConceptId);
+		//Concept weight = Context.getConceptService().getConcept(weightConceptId);
+
+		for (Obs obs : Context.getObsService().getObservations(patient,height, false)) {
+			//for (Obs obs1 : Context.getObsService().getObservations(patient,weight, false)) {
+				if (obs != null) {
+					JSONObject json = new JSONObject();
+	
+					json.put("height", obs.getValueNumeric());
+					//json.put("weight", getPatientWeights(patient).getJSONObject(0));
+					json.put("date", obs.getDateChanged() == null ? sdf.format(obs.getDateCreated())
+							: sdf.format(obs.getDateChanged()));
+					heightsJson.put(json);
+				}
+			}
+		//}
+		return heightsJson;
+	}
 }
