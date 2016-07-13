@@ -32,5 +32,6 @@ public interface IsantePlusOmrsIntroService extends OpenmrsService {
 	 * 
 	 */
 	public JSONArray getPatientWeights(Patient patient);
-	public JSONArray getPatientHeights(Patient patient);
+	public Double getPatientHeights(Patient patient);
+	//public JSONArray getPatientBmi(Patient patient);
 }
