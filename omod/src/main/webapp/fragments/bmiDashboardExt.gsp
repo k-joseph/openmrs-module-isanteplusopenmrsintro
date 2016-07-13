@@ -8,7 +8,7 @@
     <div class="info-body">
     	<canvas id="bmiChart" width="50" height="50"></canvas>
 		<script type="text/javascript">
-			var bmiValues = ${bmiValues}
+			var bmiValues =${bmiValues}
 			var bmiLabels = ${bmiLabels}
 			var chartDataSchema = {
         		labels: bmiLabels,
