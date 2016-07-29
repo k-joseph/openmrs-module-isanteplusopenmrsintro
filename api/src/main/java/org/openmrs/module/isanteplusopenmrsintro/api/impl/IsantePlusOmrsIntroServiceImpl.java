@@ -17,8 +17,11 @@ import org.apache.commons.logging.LogFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.openmrs.Concept;
+import org.openmrs.ConceptNumeric;
 import org.openmrs.Obs;
 import org.openmrs.Patient;
+import org.openmrs.api.AdministrationService;
+import org.openmrs.api.ConceptService;
 import org.openmrs.api.context.Context;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.isanteplusopenmrsintro.api.IsantePlusOmrsIntroService;
@@ -70,5 +73,33 @@ public class IsantePlusOmrsIntroServiceImpl extends BaseOpenmrsService implement
 			}
 		}
 		return weightsJson;
+	}
+	@Override
+	public Double getPatientHeights(Patient patient) {
+		
+		ConceptService cs = Context.getConceptService();
+		Obs latestHeight = null;
+		Integer heightConceptId = StringUtils
+				.isNotBlank(Context.getAdministrationService().getGlobalProperty("concept.height"))
+						? Integer.parseInt(Context.getAdministrationService().getGlobalProperty("concept.height"))
+						: 5090;
+		Concept height = Context.getConceptService().getConcept(heightConceptId);
+		
+		for (Obs obs : Context.getObsService().getObservations(patient,height, false)) {
+			if (obs != null) {
+				ConceptNumeric heightConcept = null;
+				heightConcept = cs.getConceptNumeric(cs.getConcept(Integer.valueOf(heightConceptId))
+					        .getConceptId());
+				
+				if (obs.getConcept().equals(heightConcept)
+				        && (latestHeight == null || obs.getObsDatetime().compareTo(
+				            latestHeight.getObsDatetime()) > 0)) {
+					latestHeight = obs;
+				}
+				
+				}
+			}
+		Double heightValues = latestHeight.getValueNumeric();
+		return heightValues;
 	}
 }
